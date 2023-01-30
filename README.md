@@ -1,6 +1,6 @@
 # Quick Back-Office Search Bar
 
-[![License: MIT](https://img.shields.io/github/license/sorciento/magento2-snowflake.svg?style=flat-square)](./LICENSE)
+[![License: MIT](https://img.shields.io/github/license/sorciento/magento2-quickbo-search-bar.svg?style=flat-square)](./LICENSE)
 
 Add a quick search bar in back-office dashboard to look for products, orders, customers, CMS pages or blocks
 
