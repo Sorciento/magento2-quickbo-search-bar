@@ -10,7 +10,7 @@
     "ext-json": "*"
   },
   "license": [
-    "Open Software License (OSL)"
+    "MIT"
   ],
   "autoload": {
     "files": [
