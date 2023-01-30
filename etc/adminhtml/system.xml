@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Sorciento <contact@sorciento.com>
+ * @copyright 2023-present Sorciento
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @link      https://www.sorciento.com/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="sorciento" translate="label" sortOrder="99000">
+            <label>Sorciento</label>
+        </tab>
+        <section id="quickbosearchbar" translate="label" sortOrder="1700" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Quick BO Search Bar</label>
+            <tab>sorciento</tab>
+            <resource>Sorciento_QuickBOSearchBar::quickbosearchbar_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Status</label>
+                    <config_path>quickbosearchbar/general/enabled</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

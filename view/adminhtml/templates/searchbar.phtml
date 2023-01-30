@@ -1,0 +1,174 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @author    Sorciento <contact@sorciento.com>
+ * @copyright 2023-present Sorciento
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @link      https://www.sorciento.com/
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+?>
+<section class="sorciento-quick-bo-searchbar" data-index="sorciento-quick-bo-searchbar">
+    <div class="sorciento-quick-bo-searchbar-description">
+        <header class="dashboard-item-title"><?= $escaper->escapeHtml(__('Quick search')) ?></header>
+        <div class="admin__field-tooltip">
+            <span class="admin__field-tooltip-action" tabindex="1">
+                <span data-bind="i18n: 'How to search?'"></span>
+            </span>
+            <div class="admin__field-tooltip-content tooltip-top-right">
+                <div class="tooltip-container">
+                    <h4><?= $escaper->escapeHtml(__('Enter pattern you search (2 characters or more)')) ?></h4>
+                    <p><?= $escaper->escapeHtml(__('You can specify what you are looking for (not those droids):')) ?></p>
+                    <dl data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                        <dt data-role="title"><?= $escaper->escapeHtml(__('Products')) ?></dt>
+                        <div data-role="content">
+                        <dd><span class="abbr">prod</span>: <?= $escaper->escapeHtml(__('Product Id')) ?></dd>
+                        <dd><span class="abbr">sku</span>: <?= $escaper->escapeHtml(__('Product Sku')) ?></dd>
+                        </div>
+                    </dl>
+                    <dl data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                        <dt data-role="title"><?= $escaper->escapeHtml(__('Orders')) ?></dt>
+                        <div data-role="content">
+                        <dd><span class="abbr">order</span>: <?= $escaper->escapeHtml(__('Order Id')) ?></dd>
+                        <dd><span class="abbr">inc</span>: <?= $escaper->escapeHtml(__('Order Increment Id')) ?></dd>
+                        <dd><span class="abbr">ord@</span>: <?= $escaper->escapeHtml(__('Order Customer E-mail')) ?></dd>
+                        </div>
+                    </dl>
+                    <dl data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                        <dt data-role="title"><?= $escaper->escapeHtml(__('Customers')) ?></dt>
+                        <div data-role="content">
+                        <dd><span class="abbr">cust</span>: <?= $escaper->escapeHtml(__('Customer Id')) ?></dd>
+                        <dd><span class="abbr">cus@</span>: <?= $escaper->escapeHtml(__('Customer E-mail')) ?></dd>
+                        <dd><span class="abbr">dob</span>: <?= $escaper->escapeHtml(__('Customer Date of Birth')) ?></dd>
+                        </div>
+                    </dl>
+                    <dl data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                        <dt data-role="title"><?= $escaper->escapeHtml(__('Cms Pages')) ?></dt>
+                        <div data-role="content">
+                        <dd><span class="abbr">cmspid</span>: <?= $escaper->escapeHtml(__('CMS Page Id')) ?></dd>
+                        <dd><span class="abbr">cmspkey</span>: <?= $escaper->escapeHtml(__('CMS Page Identifier')) ?></dd>
+                        <dd><span class="abbr">cmspti</span>: <?= $escaper->escapeHtml(__('CMS Page Title')) ?></dd>
+                        <dd><span class="abbr">cmspco</span>: <?= $escaper->escapeHtml(__('CMS Page Content')) ?></dd>
+                        </div>
+                    </dl>
+                    <dl data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                        <dt data-role="title"><?= $escaper->escapeHtml(__('Cms Blocks')) ?></dt>
+                        <div data-role="content">
+                        <dd><span class="abbr">cmsbid</span>: <?= $escaper->escapeHtml(__('CMS Block Id')) ?></dd>
+                        <dd><span class="abbr">cmsbkey</span>: <?= $escaper->escapeHtml(__('CMS Block Identifier')) ?></dd>
+                        <dd><span class="abbr">cmsbti</span>: <?= $escaper->escapeHtml(__('CMS Block Title')) ?></dd>
+                        <dd><span class="abbr">cmsbco</span>: <?= $escaper->escapeHtml(__('CMS Block Content')) ?></dd>
+                        </div>
+                    </dl>
+                    <p><em><?= $escaper->escapeHtml(__('eg: "sku:MB" will search specifically in product SKUs')) ?></em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sorciento-quick-bo-searchbar-actions">
+        <form id="quick-search" class="quick-search-form" autocomplete="off">
+            <div class="admin__field-control">
+                <label for="query-input" style="display: none"><?= $escaper->escapeHtml(__('Quick search')) ?></label>
+                <input type="text"
+                       id="query-input"
+                       name="query-input"
+                       class="admin__control-text"
+                       placeholder="<?= $escaper->escapeHtml(
+                           __('Enter Order Id, Increment Id, Customer Id, Product Id or SKU…')
+                       ) ?>"
+                />
+            </div>
+        </form>
+        <div id="sorciento-quick-bo-searchbar-section-labels" class="sorciento-quick-bo-searchbar-section-labels"></div>
+        <div id="sorciento-quick-bo-searchbar-results" class="sorciento-quick-bo-searchbar-results"></div>
+    </div>
+</section>
+<script>
+    require([
+        'jquery',
+        'domReady!'
+    ], function ($) {
+        let queryInput = $('#query-input');
+        let sorcientoQuickBoSearchbarSectionLabel = $('#sorciento-quick-bo-searchbar-section-labels');
+        let sorcientoQuickBoSearchbarResults = $('#sorciento-quick-bo-searchbar-results');
+        var isRequestSend = false;
+        queryInput.on('keyup', function (ev) {
+            if (isRequestSend
+                || (ev.keyCode >= 9 && ev.keyCode <= 45)
+                || (ev.keyCode >= 91 && ev.keyCode <= 93)
+                || (ev.keyCode >= 112 && ev.keyCode <= 145)
+            ) {
+                ev.preventDefault();
+                return;
+            }
+
+            sorcientoQuickBoSearchbarSectionLabel.empty();
+            sorcientoQuickBoSearchbarResults.empty();
+            let requestedValue = $(this).val();
+            let dataToSend = $("#quick-search").serialize();
+            if (requestedValue.length > 1) {
+                isRequestSend = true;
+                $.ajax({
+                    url: '<?= $block->getUrl('quick_search_request/request/index') ?>',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: dataToSend,
+                    showLoader: true
+                }).success(function (result) {
+                    let dataList = result.dataList;
+                    if (!_.isEmpty(dataList)) {
+                        let newLabels = $( "<ul id='labels' class='sorciento-quick-bo-searchbar-section-labels__list'></ul>" );
+                        sorcientoQuickBoSearchbarSectionLabel.append(newLabels);
+                        let labelContainer = $('#labels');
+
+                        let newResults = $( "<ul id='results'></ul>" );
+                        sorcientoQuickBoSearchbarResults.append(newResults);
+                        let resultContainer = $('#results');
+
+                        for(var classType in dataList) {
+                            // Filtering Label
+                            let labelElement = $( "<li class='section-label' id='label-" + classType + index + "'>" + classType + "</li>" );
+                            labelContainer.append(labelElement);
+
+                            // Class Type Header
+                            let classTypeElement = $( "<li class='class-type' id='" + classType + "' data-type='" + classType + "'>" + classType + "</li>" );
+                            resultContainer.append(classTypeElement);
+                            if (dataList[classType].length !== 0) {
+                                for (var index in dataList[classType]) {
+                                    let classTypeElement = "<li class='result-link' id='" + classType + index + "' data-type='" + classType + "'>";
+                                    if (dataList[classType][index].thumbnail_url !== undefined) {
+                                        classTypeElement += '<img src="' + dataList[classType][index].thumbnail_url + '" title="' + dataList[classType][index].name + ' thumbnail" class="product-thumbnail">'
+                                    }
+                                    classTypeElement += "<a href='" + dataList[classType][index].link + "'>" + dataList[classType][index].full_line + "</a>";
+                                    classTypeElement += "</li>";
+
+                                    resultContainer.append($(classTypeElement));
+                                }
+                            }
+                        }
+
+                        $('.section-label').on('click', function (ev) {
+                            let wasActiveBefore = $(this).hasClass('active');
+                            $('.section-label').removeClass('active');
+                            $('.result-link').show();
+                            if (!wasActiveBefore) {
+                                $(this).addClass('active');
+                                $('.result-link[data-type!="' + this.innerText +'"]').hide();
+                            }
+                        });
+                    }
+                    isRequestSend = false;
+                }).done(function() {
+                    isRequestSend = false;
+                });
+            }
+        });
+    });
+</script>

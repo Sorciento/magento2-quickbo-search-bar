@@ -1,0 +1,30 @@
+{
+  "name": "sorciento/module-quickbo-search-bar",
+  "version": "100.0.0",
+  "description": "Quick search for Products, Orders, Customers, CMS Page or Block directly from back-office dashboard",
+  "type": "magento2-module",
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "magento/framework": "^103.0",
+    "magento/module-backend": "102.0.*",
+    "ext-json": "*"
+  },
+  "license": [
+    "Open Software License (OSL)"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Sorciento\\QuickBOSearchBar\\": ""
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/sorciento/magento2-quickbo-search-bar"
+    }
+  ],
+  "minimum-stability": "stable"
+}

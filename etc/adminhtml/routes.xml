@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Sorciento <contact@sorciento.com>
+ * @copyright 2023-present Sorciento
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @link      https://www.sorciento.com/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="quick_search_request" frontName="quick_search_request">
+            <module name="Sorciento_QuickBOSearchBar"/>
+        </route>
+    </router>
+</config>

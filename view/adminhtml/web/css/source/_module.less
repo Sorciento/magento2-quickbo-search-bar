@@ -1,0 +1,187 @@
+.sorciento-quick-bo-searchbar {
+    &-description,
+    .quick-search-form {
+        margin-bottom: 1rem;
+    }
+
+    &-description {
+        display: flex;
+        align-items: center;
+
+        .admin__field-tooltip-action {
+            margin: 0 0 0.25rem 0.5rem;
+            cursor: pointer;
+        }
+
+        .tooltip-top-right {
+            width: 48rem;
+            bottom: 4.8rem;
+            left: -2rem;
+            max-height: 220px;
+
+            &::before,
+            &::after {
+                left: 2rem;
+            }
+
+            .tooltip-container {
+                padding: 1.5rem 2rem 1.5rem 2.5rem;
+                max-height: 180px;
+                overflow-y: scroll;
+
+                dl {
+                    transition: all 300ms ease-in-out;
+                    position: relative;
+
+                    dt {
+                        cursor: pointer;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+
+                        &::after {
+                            content: '\e628';
+                            font-family: 'Admin Icons';
+                            position: absolute;
+                            right: 10px;
+                            transition: all 300ms ease-in-out;
+                        }
+                    }
+
+                    &.active {
+                        dt {
+                            &::after {
+                                transform: rotate(180deg);
+                                transition: all 300ms ease-in-out;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &-section-labels {
+        &__list {
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+
+            .section-label {
+                margin-inline: 1rem;
+                border: 1px solid @color-darkie-gray;
+                border-radius: 2rem;
+                padding: 0.5rem 1rem;
+                background-color: @color-white;
+                color: @color-black_dark;
+
+                &:hover {
+                    background-color: #ff6a1e;
+                    color: @color-white;
+                    cursor: pointer;
+                }
+
+                &:active {
+                    background-color: #fd9159;
+                    color: @color-white;
+                    cursor: pointer;
+                }
+
+                &.active {
+                    background-color: @theme__color__secondary;
+                    color: @color-white;
+
+                    &:hover {
+                        background-color: #ff6a1e;
+                    }
+
+                    &:active {
+                        background-color: #fd9159;
+                        color: @color-white;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    &-results {
+        outline: 1px solid #adadad;
+
+        &:empty {
+            outline: none;
+        }
+        > ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            max-height: 32rem;
+            overflow-y: scroll;
+
+            > li {
+                background-color: #ffffff;
+                border-bottom: 1px solid #adadad;
+                border-radius: 1px;
+                box-shadow: none;
+                color: #303030;
+                font-size: 1.4rem;
+                font-weight: 400;
+                height: auto;
+                line-height: 1.36;
+                padding: 0.6rem 1rem 0.6rem;
+                transition: border-color 0.1s linear;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:nth-child(odd) {
+                    background-color: #f0f0f0;
+                }
+
+                &:hover:not(.class-type) {
+                    background-color: #e8e8e8;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .class-type {
+            font-weight: 700;
+            background-color: #d8d8d8 !important;
+            text-transform: capitalize;
+        }
+
+        .result-link {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+
+            &::before {
+                content: '';
+            }
+
+            a {
+                color: @color-black;
+                text-decoration: none;
+                margin-inline: 1rem;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top:0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+            }
+        }
+    }
+}
+

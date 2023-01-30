@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Sorciento <contact@sorciento.com>
+ * @copyright 2023-present Sorciento
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @link      https://www.sorciento.com/
+ */
+-->
+<page xmlns:xsi="http://www.w3.org./2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block name="sorciento_quick_bo_search_bar"
+                   template="Sorciento_QuickBOSearchBar::searchbar.phtml"
+                   before="-"
+                   ifconfig="quickbosearchbar/general/enabled"
+            />
+        </referenceContainer>
+    </body>
+</page>

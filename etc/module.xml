@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Sorciento <contact@sorciento.com>
+ * @copyright 2023-present Sorciento
+ * @license   https://opensource.org/licenses/MIT The MIT License
+ * @link      https://www.sorciento.com/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Sorciento_QuickBOSearchBar"/>
+</config>
