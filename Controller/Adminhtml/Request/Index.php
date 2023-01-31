@@ -203,7 +203,7 @@ class Index extends Action implements HttpPostActionInterface
             || (!$queryHasNoFilter && in_array($query[1], array_keys(self::CUSTOMER_QUERY_FIELDS)))
         ) {
             $customerResults = $this->getCustomerCollection(trim($query[0]),
-                $queryHasNoFilter ? '' : self::ORDER_QUERY_FIELDS[$query[1]]);
+                $queryHasNoFilter ? '' : self::CUSTOMER_QUERY_FIELDS[$query[1]]);
             if ($customerResults) {
                 $collectionResult['customer'] = $customerResults;
             }
@@ -313,7 +313,7 @@ class Index extends Action implements HttpPostActionInterface
                 CustomerInterface::CREATED_AT => $customer->getCreatedAt(),
                 'full_line'                   => "[{$customer->getId()}] {$customer->getFirstname()} {$customer->getLastname()}, {$customer->getEmail()}, DOB: {$customer->getDob()}, Account created: {$customer->getCreatedAt()}",
                 'link'                        => $this->_backendUrl
-                    ->getUrl('customer/index/view', ['entity_id' => $customer->getId()]),
+                    ->getUrl('customer/index/edit', ['id' => $customer->getId()]),
             ];
         }
 
