@@ -57,6 +57,8 @@ class Index extends Action implements HttpPostActionInterface
 
     private const CUSTOMER_QUERY_FIELDS = [
         'cust' => CustomerInterface::ID,
+        'fname' => CustomerInterface::FIRSTNAME,
+        'lname' => CustomerInterface::LASTNAME,
         'cus@' => CustomerInterface::EMAIL,
         'dob' => CustomerInterface::DOB,
     ];
@@ -75,14 +77,14 @@ class Index extends Action implements HttpPostActionInterface
         'cmsbco' => BlockInterface::CONTENT,
     ];
 
-    const PRODUCT_COLLECTION_FIELDS_TO_FILTER = [
+    private const PRODUCT_COLLECTION_FIELDS_TO_FILTER = [
         'entity_id',
         ProductInterface::SKU,
         ProductInterface::TYPE_ID,
         ProductInterface::NAME,
     ];
 
-    const ORDER_COLLECTION_FIELDS_TO_FILTER = [
+    private const ORDER_COLLECTION_FIELDS_TO_FILTER = [
         OrderInterface::ENTITY_ID,
         OrderInterface::INCREMENT_ID,
         OrderInterface::CUSTOMER_EMAIL,
@@ -90,21 +92,22 @@ class Index extends Action implements HttpPostActionInterface
         OrderInterface::GRAND_TOTAL,
     ];
 
-    const CUSTOMER_COLLECTION_FIELDS_TO_FILTER = [
+    private const CUSTOMER_COLLECTION_FIELDS_TO_FILTER = [
         'entity_id',
         CustomerInterface::FIRSTNAME,
         CustomerInterface::LASTNAME,
         CustomerInterface::EMAIL,
+        CustomerInterface::DOB,
     ];
 
-    const CMS_BLOCK_COLLECTION_FIELDS_TO_FILTER = [
+    private const CMS_BLOCK_COLLECTION_FIELDS_TO_FILTER = [
         BlockInterface::BLOCK_ID,
         BlockInterface::IDENTIFIER,
         BlockInterface::TITLE,
         BlockInterface::CONTENT,
     ];
 
-    const CMS_PAGE_COLLECTION_FIELDS_TO_FILTER = [
+    private const CMS_PAGE_COLLECTION_FIELDS_TO_FILTER = [
         PageInterface::PAGE_ID,
         PageInterface::IDENTIFIER,
         PageInterface::TITLE,
